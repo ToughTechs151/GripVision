@@ -32,8 +32,8 @@ public class Vision3 {
 		// Step CV_resize0:
 		Mat cvResizeSrc = source0;
 		Size cvResizeDsize = new Size(0, 0);
-		double cvResizeFx = 0.125;
-		double cvResizeFy = 0.125;
+		double cvResizeFx = 1;
+		double cvResizeFy = 1;
 		int cvResizeInterpolation = Imgproc.INTER_LINEAR;
 		cvResize(cvResizeSrc, cvResizeDsize, cvResizeFx, cvResizeFy, cvResizeInterpolation, cvResizeOutput);
 

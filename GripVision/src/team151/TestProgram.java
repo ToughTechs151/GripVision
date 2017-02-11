@@ -21,11 +21,13 @@ import javax.swing.JScrollPane;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.videoio.VideoCapture;
 
 public class TestProgram {
 
 	public static void main(String[] args) {
 		
+/*
 		JFrame frame = new JFrame();
 		frame.setLayout(new FlowLayout());
 		
@@ -106,45 +108,50 @@ public class TestProgram {
 		frame.setVisible(true);
 		
 		
+*/
 		
 		
 		
 		
 		
-		
-
+//		Vision3 vis = new Vision3();
+		GripPipeline vis = new GripPipeline();
 		//frame.setVisible(true);
+		JFrame vidContainer = new JFrame();
+		ImagePanel vidPanel = new ImagePanel();
+		vidContainer.add(vidPanel);
+		VideoCapture cap = new VideoCapture(1);
+		Mat vidFrame = new Mat();
+		BufferedImage temp;
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+//			 TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		vidContainer.setVisible(true);
 
-		//double[] redVid = {100, 120};
-		//double[] greenVid = {90, 110};
-		//double[] blueVid = {100, 115};
-		//		VideoCapture cap = new VideoCapture("C:\\Users\\Shannon\\Downloads\\1j1f2z.mp4");
-		//VideoCapture cap = new VideoCapture(0);
-		//Mat vidFrame = new Mat();
-		//BufferedImage temp;
-		//try {
-		//	Thread.sleep(1000);
-		//} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
-
-		//if(cap.isOpened())  {  
-		//	System.out.println("yay");
-		//	while( true )  {  
-		//		cap.read(vidFrame);  
-		//		if(!vidFrame.empty() )  {  
-//					frame.setSize(vidFrame.width()+40, vidFrame.height()+60);  
-		//			temp = vidPanel.matToBufferedImage(vis.getFinalMat(vidFrame, 1, redVid, greenVid, blueVid));  
-		//			vidPanel.setImage(temp);  
-		//			vidPanel.repaint();  
-		//		}  else  {  
-		//			System.out.println(" --(!) No captured frame -- Break!");  
-		//			break;  
-		//		}  
-		//	}  
-		//}  
-		//return;  
+		if(cap.isOpened())  {  
+			System.out.println("yay");
+			while(true)  {  
+				cap.read(vidFrame);  
+				if(!vidFrame.empty() )  {  
+					vidContainer.setSize(vidFrame.width()+40, vidFrame.height()+60);  
+					temp = vidPanel.matToBufferedImage(vis.process(vidFrame)); 
+//					temp = vidPanel.matToBufferedImage(vidFrame);
+					vidPanel.setImage(temp);  
+					vidPanel.repaint();  
+					System.out.println(vis.getDistanceAway());
+				}  else  {  
+					System.out.println(" --(!) No captured frame -- Break!");  
+					break;  
+				}  
+			}  
+		} else {
+			System.out.println("no");
+		}
+		return;  
 	}  
 
 
