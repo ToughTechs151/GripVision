@@ -142,7 +142,7 @@ public class TestProgram {
 //					temp = vidPanel.matToBufferedImage(vidFrame);
 					vidPanel.setImage(temp);  
 					vidPanel.repaint();  
-					System.out.println(vis.getDistanceAway());
+					System.out.println(vis.getDistance());
 				}  else  {  
 					System.out.println(" --(!) No captured frame -- Break!");  
 					break;  
